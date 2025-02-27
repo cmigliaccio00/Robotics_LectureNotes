@@ -1,0 +1,51 @@
+\documentclass[a4paper, 12pt]{report}
+\include{packages.tex}
+\usepackage{biblatex} %Imports biblatex package
+\addbibresource{biblio_ROB.bib} %Import the bibliography file
+\usepackage{longtable}
+\usepackage{xcolor}
+%\usepackage{newpxtext,newpxmath} %per stile palatino
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\pagestyle{headings}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.35\textwidth]{img/logo_Polito_nuovo.png}\\[0.7cm] % Sostituisci con il nome del tuo file
+    \vfill
+    {\Huge \textbf{ROBOTICS}\\[1cm]
+    \textit{Lecture notes}}\\[2cm]
+
+    \includegraphics[scale=0.16]{img/8058233.jpg}\\[2cm]
+    
+    {\Large \textsf{Carlo Migliaccio}}\\[0.2cm]
+    {\large \textsf{Master's Degree in Computer Engineering (LM-32)}}\\[1.5cm]
+    {\large Academic Year 2024/25}\\[2cm]
+    \vfill
+\end{titlepage}
+\newpage
+\tableofcontents
+
+\input{Chapters/Ch1_Intro.tex}
+%\input{Chapters/Ch2_Kinematics.tex}
+\input{Chapters/Ch3_MobileRobots.tex}
+
+%Appendices
+\appendix
+\renewcommand{\thechapter}{\Alph{chapter}}
+\renewcommand{\theHchapter}{\thechapter}
+\setcounter{chapter}{0}
+%\input{Chapters/A_Algebra.tex}
+%\input{Chapters/B_RigidBody.tex}
+
+\printbibliography
+
+
+\end{document}
