@@ -1,7 +1,9 @@
 \chapter{Introduction}
+\vspace{-0.7em}
+\minitoc
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=1]{img/robotic_system.png}
+    \includegraphics[scale=0.8]{img/robotic_system.png}
     \caption{Components of a robotic system}
 \end{figure}
 \vspace{-0.5cm}
@@ -17,7 +19,7 @@ The \textbf{perception} part rely on sensors which can acquire data about either
 The connection between the the actuation and sensing part is provided by a \textit{control system} which in an intelligent way can command the execution of some actions. It is remarkable that the control system exploits a mathematical model of the robot.\\
 At this point, we can say that \textbf{Robotics} deals with
 \begin{center}
-    \Large
+    \normalsize
     \colorbox{lightgray}{\textbf{study} and \textbf{design} of robots.}
 \end{center}
 this is the reason why it results in an interdisciplinary subject involving \textit{mechanics, control, computers} and \textit{electronics}.\\
@@ -51,15 +53,15 @@ The main feature here is the presence of a \textit{mobile base} which allows the
 
 \section{Robot modeling, planning and control}
 The totality of the tasks to be completed requires the execution of a \textit{specific motion prescribed to the robot}. The correct execution of the motion is entrusted to the control systems which should provide actuators with \textbf{command} consitstent with the desired motion (motion control), this -- in turn -- rely on an accurate analysis on the features of (jointly) mechanical structrure, actuators and sensors. The final aim of such an analysis is the derivation of a mathematical model describing the I/O relationship for the robot components (modeling component). Relevant topics in \textit{modeling, planning} and \textit{control} are briefly resumed in the following. 
-
+\vspace{-0.3cm}
 \subsection{Modelling}
 Obtaining a model for a robot (industrial or mobile) concerns essentially in studying both the \textbf{kinematics} and \textbf{dynamics}. The former is the description of the robot motion without taking into account forces and torques which causes it. The latter describes forces and torques which generates the motion.\\
 A further distinction is made between between \textit{kinematics} and \textit{differential kinematics} is made. In the first case we want to find a relationship between the joints and end-effector positions. In the second case we want to study the relationship between the joint and end-effector motion by means of velocity. A very useful tool in this case is the \textit{Jacobian} of the manipulator.\\
 We conclude this discussion by saying that having a model for the robot is useful for the mechanical design of the structure, choice of actuators, determination of control strategies and for doing computer-based simulations.
-
+\vspace{-0.3cm}
 \subsection{Planning}
 Every robot performs a task, for example for a manipulator we have the necessity to describe in some way the motion at the joints or at the end-effector. In material-handling task for example it is sufficient to decide an initial position and and end position (\textit{point-to-point} motion) in other situations we have to track a certain trajecotry (\textit{path motion}). In all these cases the task is the \textbf{trajectory planning} that is the determination of timing laws for relevant variables. For a mobile robot, such a task is even more complicate since it requires to take into account the constraints imposed by the wheels, legs, wings...
-
+\vspace{-0.3cm}
 \subsection{Control}
 The generated trajectories constitutes the reference signal for the \textit{control system} of the mechanical structure. Techniques for controlling manipulators and mobile robots are very different how we will see this is due the presence or not of the interaction robot-environment and of the mobile base.
 

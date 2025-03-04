@@ -1,8 +1,10 @@
 \chapter{Mobile robots}
-\vspace{-1cm}
+\vspace{-0.5cm}
+\minitoc
+
 \begin{figure}[h]
     \centering
-    \includegraphics[scale=0.5]{img/classification.jpg}
+    \includegraphics[scale=0.4]{img/classification.jpg}
 \end{figure}
 \vspace{-0.5cm}
 \section{Introduction}
@@ -12,7 +14,7 @@ A \textbf{mobile robot} is a structure capable of moving and act in \textit{terr
 \noindent
 The characteristics of the environment are fundamental since planning and control are affected by it. Namely the environment can be \underline{totally structured}, \underline{unstructured} or \underline{partially structured}. We refer the \textbf{structuredness} of the environment as the knowledge on geometric characteristics.
 \subsection{Autonomy}
-A mobile robot is equipped with a certain level of \textbf{autonomy} which makes the structure capable of moving independentlyh from a human supervisor. For achieving it, it is required a computational part (CPU, Intelligence of the robot), some sensors and actuators and an energy source, which can be either generated on-board or provided by mean of an external source.
+A mobile robot is equipped with a certain level of \textbf{autonomy} which makes the structure capable of moving independently from a human supervisor. For achieving it, it is required a computational part (CPU, Intelligence of the robot), some sensors and actuators and an energy source, which can be either generated on-board or provided by mean of an external source.
 \subsection{Locomotion}
 Another fundamental aspect is that, differently from manipulators, a mobile robot is equipped with a \textbf{locomotion apparatus} which drastically changes according to the environment they are acting in. A \textbf{terrestrial robot} can have wheels, legs or a biomimetic locomotion system; a \textbf{underwater robot} can provided with propellers or water jets; finally, an \textbf{aerial robots} can have rotating, fixed or flapping wings.
 
@@ -151,7 +153,7 @@ We know that this is a vector space and it has got a basis of $n-k$ elements whi
 \begin{equation}
     \mathbf{\dot{q}=G(q)u}
 \end{equation}
-this is nothing but the \textbf{kinematic model} of the constrained system. The vector $\mathbf{q}$ is called the \emph{state vector} while $\mathbf{u}$ is the \textbf{input vector}. Moreover the obtained system is said to be driftless since in absence of an input the generalized velocity is null. Not rarely the components $u_i$ of \textbf{u} have a meaning related to the physics or the available control input.\\
+this is nothing but the \textbf{kinematic model} of the constrained system (a system of ordinary differential equations\footnote{ODE}). The vector $\mathbf{q}$ is called the \emph{state vector} while $\mathbf{u}$ is the \textbf{input vector}. Moreover the obtained system is said to be driftless since in absence of an input the generalized velocity is null. Not rarely the components $u_i$ of \textbf{u} have a meaning related to the physics or the available control input.\\
 
 In the following for better fixing the concepts we have just given, two example of kinematic models are given.
 
@@ -200,6 +202,13 @@ The kinematic model for the unicyle, then, can be written as:
 \end{multicols}
 In such a context the elements of the input vector have a physical meaning, since $v$ is the driving velocity, while $\omega$ is nothing but the steering velocity.  Why are we interested in studying the kinematic model of a unicyle? Consider that without a human beings balancing the system this is also an unstable system! However, there are some robot (stable) robot structures that from a \textbf{kinematic point of view} are equivalent to unicycles. We are talking about \emph{differential drive} and \emph{synchro drive} vehicles.
 
+\subsubsection{Differential drives: a stable structure for the unicycle model}
+A \textit{differentially driven robot} has two independent wheels with different angular velocities $\omega_R$ and $\omega_L$. Both wheels have a radius $r$ and are constrained to be at a distance $d$. A third wheel is passive, in the sense that there is not a motor changing that velocity. By doing a proper choice for the control input, we can obtain a kinematic model that is totally equivalent to the one of a unicycle. In particular, from the left and right wheels angular velocities we can obtain: 
+\begin{align}
+    &v=\frac{r}{2}{(\omega_R+\omega_L)}\\
+    &\omega=\frac{r}{d}{(\omega_R-\omega_L)}
+\end{align}
+
 \subsubsection{Kinematic model for a bicycle}
 A \textbf{bicycle} is vehicle with a steered wheel and a fixed one, the distance between the wheels is fixed to be $L$. As usual we have to choose the (generalized) coordinates for such a vehicle a possible choice is the following:
 \begin{itemize}
@@ -236,9 +245,9 @@ where we have used that $\sin^2\theta+\cos^2\theta=1$ and the trigonometric form
         \sin(\theta+\phi)&-cos(\theta+\phi)&-\ell\cos\phi&0
     \end{bmatrix}
 \end{equation}
+\newpage
 \begin{multicols}{2}
-    
-\noindent 
+
 Our objective is obtaining a basis for the null space of such a matrix in order to derive the kinematic model. Since $rank(\mathbf{A^T(q)})=2$, the dimension of its null space is given by the difference between the dimension of the configuration space and such a rank, that is 2. A possible basis for such a null space is given by the column of
 \begin{equation}
     \mathbf{G(q)}=\begin{bmatrix}
@@ -275,7 +284,14 @@ The associated kinematic model is:
     \end{bmatrix}\omega
 \end{equation}
 the control input $u_1$ can be choosen according to the drive in particular $u_1=v$ if the vehicle is front-drive, $u_1=v/\cos\theta$ if the vehicle is back drive, since the first two equations must be equivalent to the ones of a unicyle. Just for a matter of notation/nomenclature the instersection point $C$ between the two zero motion lines is called \textit{instantaneous center of rotation}, depends only on $\mathbf{q}$ and it is interesting since each point of the chassis is moving instantaneously along along the circumference centered at $C$ (see \Cref{fig:scheme_bicycle}).\\
-Equivalent (stable) systems having the same kinematic model are the \textbf{tricyle} and the \textbf{automobile}.
+Equivalent (stable) systems having the same kinematic model are the \textbf{tricyle} and the \textbf{automobile}.\\
+An interesting point is that, if we assume that the steering velocity can be \textit{manually controlled}, the number of state variables (generalized coordinates) for the bicycle is the same than the unicycle. In this way we can model both systems using the same kinematic model.
+\begin{remark}
+    We remind that the kinematic model represent a system of ODE which can be solved using any integration method available in MATLAB. For example we can obtain the trajectory of the unicycle/bicyle model and the time law for $\theta$ by using the command \texttt{ode45}.
+\end{remark}
 
 \section{Sensors for mobile robots}
+\subsection{Sensors classification}
+\subsection{Sensors characteristics}
+\subsection{Types of sensors}
 

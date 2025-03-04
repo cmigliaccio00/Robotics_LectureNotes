@@ -9,3 +9,15 @@ Robotics_main.toc
 Robotics_main.synctex.gz
 Robotics_main.bbl
 Robotics_main.blg
+paper/mainPaper.fls
+.gitignore
+paper/mainPaper.log
+paper/mainPaper.fdb_latexmk
+paper/mainPaper.aux
+paper/mainPaper.synctex.gz
+Robotics_main.maf
+Robotics_main.mtc
+Robotics_main.mtc0
+Robotics_main.mtc1
+Robotics_main.mtc2
+Robotics_main.mtc3

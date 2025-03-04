@@ -3,9 +3,12 @@
 \usepackage{biblatex} %Imports biblatex package
 \addbibresource{biblio_ROB.bib} %Import the bibliography file
 \usepackage{longtable}
+\usepackage{minitoc}
+\mtcsetdepth{minitoc}{1}
 \usepackage{xcolor}
 %\usepackage{newpxtext,newpxmath} %per stile palatino
 
+\renewcommand{\mtctitle}{In this chapter we will see...}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -16,6 +19,7 @@
 \newtheorem*{remark}{Remark}
 
 \begin{document}
+\dominitoc
 \begin{titlepage}
     \centering
     \includegraphics[width=0.35\textwidth]{img/logo_Polito_nuovo.png}\\[0.7cm] % Sostituisci con il nome del tuo file
@@ -36,6 +40,7 @@
 \input{Chapters/Ch1_Intro.tex}
 %\input{Chapters/Ch2_Kinematics.tex}
 \input{Chapters/Ch3_MobileRobots.tex}
+\input{Chapters/Ch4_Manipulators.tex}
 
 %Appendices
 \appendix
