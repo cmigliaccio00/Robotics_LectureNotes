@@ -313,3 +313,24 @@ The \textit{inverse kinmeatic problem} could be solved by using algebraic or geo
     \text{given } \ \bb{x}_e(\bb{q}) \to \text{I want } \bb{q} 
 \end{equation}
 }
+
+In the next chapter about \textit{differential kinematics} we will find a way for inverting the kinematic equation using the \textbf{jacobian of the manipulator}.
+
+\subsection{(Analytic) Solution for manipulators with spherical wrist}
+The great majority of existing manipulators are simple from a kinematic point of view, since they are composed of a shoulder whose objective is to give a position to $O_e$ with typical structures (cylindrical, polar, antropomorphic...) and a spherical wrist for the orientation of $\mathcal{R}_e$. This is not a casual choice, since it derives from the difficulty in finding the solution for the inverse kinematic problem.\\
+It holds that for 6dof manipulators there is an analytic solution to  the problem if:
+\begin{enumerate}
+    \itemsep-0.3em 
+    \item Three axis of adjacent rotoidal joints intersect in a point (case of spherical wrist); 
+    \item Three axis of adjacent rotoidal joints are parallel the one with respect to the others. 
+\end{enumerate}
+
+When this is possible we can articulate the solution for the inverse kinematics in two parts. In particular given the position and orientation of the end effector $\bb{p}_e$ and $\bb{R}_e$: (i) we find the joint variables of the shoulder inverting the $\bb{p}_e(q_1,q_2,q_3)$, then using $\bb{R}_0^3$ and $\bb{R}_e$ we find the direct kinematics relation for the wrist whose inversion leads to the remaining joint variables $\theta_1, \theta_2, \theta_3$ which gives the orientation of the end-effector.\\
+In this way we are solving separetely the inverse kinematics for the shoulder and for the spherical wrist.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.8]{img/man_spherical_wrist.png}
+    \caption{Example of manipulator with spherical wrist}
+\end{figure}
+
