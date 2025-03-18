@@ -255,9 +255,61 @@ The parameters are summarized in the \Cref{fig:DHparam} and by multiplying the m
 \section{Other aspects about manipulators}
 
 \subsection{Operational space and Joint space}
+We have seen till now that the \textit{direct kinematics equation} allows to describe the position and orientation of the end-effector (the reference frame attached to it) in function of the joint variable with respect to the base reference frame. When we want to describe a task to be performed from the manipulator, we have the necessity to describe both position and orientation of $\mathcal{R_e}$ in the time (\textit{trajectories}). \\
+As far as the position is concerned, we can proceed in a simple way while it is very difficult to guarantee the \textit{orthogonality condition} during the time for the end-effector unit vectors $\bb{n}_e, \bb{s}_e, \bb{n}_e$. What is useful is to reduce the rotation matrix $R_e^b$ to a minimal representation, for example the Euler angles associated to the rotation of $\mathcal{R}_e$ with respect to $\mathcal{R}_b$. In this way the end-effector pose can be expressed in terms of the following vector $\bb{x}_e$ having a number $m\le{6}$: 
+\begin{equation}
+    \bb{x}_e=\begin{bmatrix}
+        \bb{p}_e\\
+        \bb{\phi}_e
+    \end{bmatrix}
+\end{equation}
+ where $\bb{p}_e$ is related to the position of $O_e$ while $\phi_e$ expresses the orientation of the end-effector. Such an alternative representation is more confortable: since $\bb{k}$ is a vector function, tools from calculus (derivatives, gradients...) can be used. The space in which the vector $x_e$ is defined is called \textbf{operational space} since we use it to describe the task to be performed by the manipulator. The space of the joint variables 
+ \begin{equation}
+    \bb{q}=\begin{bmatrix}
+        q_1\\ \vdots \\ q_n
+    \end{bmatrix}
+ \end{equation}
+is called \textbf{joint space} (or \textbf{configuration space}). We recall that 
+\begin{equation}
+    q_i=\begin{cases}
+        d_i&\text{Prismatic joint}\\
+        \theta_i&\text{Revolute joint}
+    \end{cases}
+\end{equation}
+
+At this point the direct kinematic equation can be also expressed in the following form
+\begin{equation}
+    \bb{x}_e=\bb{k(q)}
+\end{equation}
+where the function $\bb{k}$ allows the computation of the operational space variables starting from the joint variables. Only in simple case finding an explicit form for $\bb{k}$ is straightforward.
 
 \subsection{Workspace}
+Taking into account the operational space, is defined \textbf{workspace} the set of points that the origin of $R_e$ can assume when the joint assume all possible configurations. Often we use to distinguish between:
+\begin{itemize}
+    \itemsep-0.3em
+    \item \textit{Reachable workspace} is the workspace that the end effector frame can describe with at least one orientation.
+    \item \textit{Dexterous workspace} is the workspace that $\mathcal{R}_e$ can reach by using many different configurations.
+\end{itemize}
+It appears clear that
+\begin{equation*}
+    \textsf{Reachable Workspace} \subseteq \textsf{Dexterous Workspace}
+\end{equation*}
+and points which are at the border of the workspace are reachable by uing a single orientation.
 
 \subsection{Accuracy and Repeteability}
+\subsubsection{Accuracy}
+In a real manipulator there is always a discrepance between computed and real DH parameters, this is essentially due to mechanical tolerances. Since DH parameters are used in order to obtain the direct kinematics equation, the effective pose the manipulator attain with respect to the computed one by using the homogeneous transformation matrix $\bb{T}_e^b$. The \textit{discrepancy} between real and computed solution is called \textbf{accuracy}. Modern manipulators guarantee an accuracy of the order of 1mm. In order to have a good accuracy, it is need a sufficiently rigid structure of the shoulder.
+
+\subsubsection{Repeteability}
+Refers to the ability of the manipulators to return to a previously reached position. It depends on the mechanical structure, on the sensors/transducers (especially from the resolution) and on the control strategies which are used, it is smaller than the accuracy. 
+Modern manipulators have, even better performances with respect to the repeteability.
 
 \section{The \textit{Inverse Kinematics} problem} 
+The \textbf{inverse kinematics problem} is related to finding what is $\bb{q}$ (joint variables) which gives a certain end-effector position and orientation $\bb{x}_e$. This is not a simple problem since: (i) closed form solutions could not exist; (ii) multiple or infinite solutions could exist; (iii) there are cases in which no solutions are available. There is a nice property which guarantee the existence of a solution if $\bb{x}_e$ belongs to the dexterous workspace. \\
+The \textit{inverse kinmeatic problem} could be solved by using algebraic or geometrical intuitions. In the former case we have to solve nonlinear trascendent equations, in the latter case we are looking for significant points which lead to the provided position and orientation of the end-effector. Very often \textbf{numerical methods} are used in order to find a valid configuration for which a certain pose of the end-effector is attained. 
+
+{\Large
+\begin{equation}
+    \text{given } \ \bb{x}_e(\bb{q}) \to \text{I want } \bb{q} 
+\end{equation}
+}
