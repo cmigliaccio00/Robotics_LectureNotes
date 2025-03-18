@@ -291,7 +291,205 @@ An interesting point is that, if we assume that the steering velocity can be \te
 \end{remark}
 
 \section{Sensors for mobile robots}
-\subsection{Sensors classification}
-\subsection{Sensors characteristics}
-\subsection{Types of sensors}
+Sensors play a crucial role in the field of robotics and mobile robots. They are, approximately, devices which takes measurement from the environment and convert them in a form which can be further analyzed by the computer of which the robot is equipped.\\
+Before focusing on sensors, let us give the definition of what a \textbf{transducer} is. This is a device by a ehich signal from one form of energy (eg. mechanical) is converted into another form of energy. Moreover can be either \textit{emitters} or \textit{receivers}.\\
+\textbf{Sensors} are receivers which covert a measurable signal intol an electric one. Very often in order to be digitally elaborated, such signals are converted by using an ADC device.\\
+
+In the following, after giving some possible classifications and features about sensors, we introduce the main types of such devices used in the field of robotics and in particular in the field of \textit{mobile robotics}.
+
+\subsection{Sensors classification and features}
+There are different classifications can be done about sensors, each one focusing on a different aspect:
+\begin{itemize}
+    \itemsep-0.3em
+    \item \textsf{Passive/Active sensors} the former ones measure the energy from the environment directly the latter ones at first inject some form of energy (eg. light) and then they measure the effects such energy produces.
+    \item \textsf{Proprioceptive/Exteroceptive sensors} is a classification based on what type of measurements the sensors themselves are taking. A \textit{proprioceptive} sensor takes measures of quantities related to the robot (internal), the other are taking the measurement with reference to the \textit{external world}.
+    \item \textsf{Type of taken measurement} in the sense that there are sensors measuring contact, position, velocity and so on.
+\end{itemize}
+In the \Cref{tab:sensfeature} we are going to give main characteristics and features for common sensors.
+
+\begin{table}
+    \centering
+    \small
+    \begin{tabular}{p{5.5cm} p{9.5cm}}
+        \toprule
+        \textbf{FEATURE}&{\textbf{DESCRIPTION}}\\
+        \midrule\midrule
+        \textbf{Linearity and nonlinearity}&{A sensor if the relationship between its input and the related output is linear. Such sensors result (approximately) in simple models, moreover the \textit{effect of noise} is also linear in the sensor range.
+        }\\
+        \midrule
+        \textbf{Measurement range}&{A sensor cannot take whatever measurement. In particular, they are in a certain interval with a smallest and a largest value. Namely $Range=[A,B]$}\\
+        \midrule
+        \textbf{Dynamic range}&{It is nothing but the ratio between $B$ and $A$ expressed in dB, that is:
+        \begin{equation*}
+            \text{Dynamic range}=20\log_{10} \frac{B}{A}
+        \end{equation*}}\\
+        \midrule
+        \textbf{Sensitivity}&{Is nothing but the slope $dy/dx$ of the sensor response. An accurate sensor should have \textit{high sensitivity}. If it is a linear one such a parameter (the derivative) is constant. The sensitivity can be used in order to detect the saturation: you have saturation when to input variation, there is no output variation. Such a phenomenona occurs outside the \textit{measurement range}}\\
+        \midrule
+        \textbf{Resolution}&{Is the minimum variation of the measured physical variables that can produce a detectaable change in the ouptut. It can be associate to either physical limitations or ADC process}\\
+        \midrule
+        \textbf{Precision}&{It represents the metric about the \textit{reproducibility} of given measurements. Ideally one would have the same measurement again and again, real sensors provide a \textit{range of values} over time which are distributed according to a certain statistical distribution.}\\
+        \midrule
+        \textbf{Accuracy}&{It is a metric quantifying the \textit{correctness} of the output provided by a sensor compared to the real value of the measured signal. The concept of \textit{real value} can turn in a philosophical one. For this reason, accuracy is assesses by taking in relation with other more accurate devices.}\\
+        \midrule
+        \textbf{Bandwidth}&{It is known as the \textit{maximum frequency} at which the sensor provides reliable measurements. We want the sensor bandwitdth to be sufficiently, but not too much, large so that the noise (tipycally high frequency signal) is avoided.}\\
+        \midrule
+        \textbf{Response time}&{Is the time which elapses between the change in the input and the associated variation of the sensor output. }\\
+        \bottomrule
+    \end{tabular}
+    \caption{Sensors characteristics and features}
+    \label{tab:sensfeature}
+\end{table}
+
+\subsection{Proximity and contact sensors}
+They are used from mobile robots in order to sense object which are either in front of them or nearby, at a distance that is fixed or parametrizable. The most general family is known as \textit{proximity sensors}, when the distance is zero (within a certain tolerance), these are \textit{contact sensors}. Such a type of robot can be used for both safety or navigation tasks. The most common forms in which you can find them are:
+\begin{enumerate}
+    \itemsep-0.3em
+    \item \textit{Photoelectric proximity} Uses a couple LED + Photoresistor in otder to sense the reflected light. It may receive a signal which is proportional to the distance.
+    \item \textit{Bumpers} Such devices present as \textit{microswitches} attached to the protective case and they are used to receive shocks and then to sense the contact.
+\end{enumerate}
+One example for both types is shown in \Cref{fig:proximity}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{img/sens_proximity.png}
+    \caption{Proximity and contact sensors. From left: photoelectric and bumper}
+    \label{fig:proximity}
+\end{figure}
+
+\subsection{Encoders}
+This are part of the \textit{proprioceptive sensors} and are devices which converts a \textbf{linear or angular position} into a digital code. The building block of any type of encoder is a \textit{disc} subvided in sectors embedded with a mechanism to count sectors. They are substancially based on optical mechanism or exploit the Hall effect.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{img/sens_encoder.png}
+    \caption{Different types of encoder}
+\end{figure}
+
+\subsection{Global Positioning Systems}
+In the case of \textit{GPS (Global Positioning System)} the localization is made possible through a set of distinguished landmarks of beacons. Such a type of localization can occur either outdoor (in the nature) or indoor (in a closed place). Different protocols are used in both cases.
+
+\subsubsection{Outdoor positioning: GNNS}
+\textbf{GNSS} stands for \textit{Global Navigation Satellite System Receivers} here a receiver (put on the robot) can sense signals from a subset of \textbf{satellites}. Using the time of arrival of such a signal the \textit{distance can be estimated}. Using the trilateration, \textit{latitude, longitude} and \textit{elevation} can be found. This is the basic version of the protocol. However there are some variants: 
+\begin{description}
+    \itemsep-0.3em
+    \item[DPGS] (Differential Global Positioning System) The GPS receiver communicates with one or more base stations (on the Earth)  in order to correct common error related to the transmission from the satellites to the Earth ground. Accuracy is of the order of meters.
+    \item[RTK] (Real time kinematics) Here instead of analzying only the time of  arrival also the carrier wave is used. The distance is inferred from the number of cycles to which is added the phase difference. In particular, the  \textit{phase difference} is provided by a base station which serves a certain number of satellites. This technique provides a fine-grained correction of the measurement, in this way the accuracy passes from meters to centimeters.
+\end{description}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{img/sensor_GPS.png}
+    \caption{Global Positioning System}
+\end{figure}
+
+\subsubsection{Indoor positioning: UWB}
+\textbf{UWB} (Ultra-wideband positioning system) is based on the same concept of GNSS. However there are some differences: (i) some \textit{anchors} are used with a frequency in the range $[3.1,10.6]$GHz; (ii) The communicaiton is bidirectional and the 3D localization can be achieved by mean of a 3D placement of the anchors. Note that each robot being localized by using UWB must be equipped with a \textbf{UWB tag}. Even in this case different strategies are used.
+
+\begin{description}
+    \itemsep-0.3em
+    \item[TDOA] (Time difference of arrival) In this case the UWB tag constantly broadcast a message with its own identity. The anchors will receive such a signal with \textit{time differences} since the position is different. If the anchors are all synchronized on the same clock signal, is possible performing the localization by using trilateration.
+    \item[TOF] (Time of flight) This technique is applied when there is the absence of a \textit{global clock}. In particular, a 2-way protocol is used: a message is sent by using the UWB tag and a control message is bounced back. The distance from the anchors is obtained by computing the \textit{time of flight}, finally trilateration is applied to retrieve the indoor positioning.
+\end{description}
+
+%---------------------------------------------------------
+\subsection{Inertial and Heading Sensors}
+There are some sensors which use the \textbf{inertia}\footnote{
+    It is the property of a body to change its current state of stillness of motion with constant linear or rotational velocities.
+} of the body to retrieve position and orientation of the body itself. Such sensors are mainly \textbf{accelerometers} and \textbf{gyroscopes}.
+
+\subsubsection{Accelerometers}
+Their objective is to measure the \textit{linear acceleration} along a defined axis, such an acceleration is typically converted into either a force or a deformation (mass-spring based). There are both \textit{piezoelectric} and \textit{capacitive} sensors.
+
+\begin{figure}
+    \centering
+    \subfigure[Accelerometer]{\includegraphics[scale=0.5]{img/sens_accelerometer.png}}
+    \subfigure[Gyroscope]{\includegraphics[scale=0.6]{img/sens_gyroscope.png}}
+    \subfigure[IMU]{\includegraphics[scale=0.7]{img/sens_IMU.png}}
+    \caption{Inertia and Heading sensors}
+\end{figure}
+
+\subsubsection{Gyroscopes}
+They are used for measuring the orientation of a body using a vibrating or rotating body which tends to preserve the initial body's orientation. They can assume the following forms: 
+\begin{description}
+    \itemsep-0.3em
+    \item[Rotating Structure Gyroscopes] They use a disk which is mounted on a structure which allows the orientation of the body to be unchanged when the whole structure itself is rotated. The orientation is obtained by computing the differences between the starting and final relative position of the body with respect to the rest of the gyroscope. Non-idealities due to friction must be taken into account for more accurate results.
+    \item[Vibrating Structure Gyroscopes] They exploit the \textit{vibration of a body} along the same direction irrespective with the rotation of the sensor itself. The vibration produces a force, whose measurement is able to provide the \textbf{rate of rotation}. The absolute orientation is obtained by mean of integration.
+\end{description}
+
+\subsubsection{Compasses}
+They are used in order to measure the direction of the Earth's magnetic field (N-S). This can be made using the \textit{Hall effect} or the \textit{Fluxgate} principle. In the former case is exploited the phenomena according which when a conductor is traversed by a current. In presence of a magnetic field a voltage is generated in the orthogonal direction of the current. In the latter case a measurement of a \textit{magnetic flux} is exploited.
+
+\subsubsection{Inertia Measurement Units (IMUs)}
+An IMU is a device which embeds in a single device all of the Inertia sensors we have seen till now. In particular there is a compass and three couples (Accelerometer, Gyroscope) along the three axis of motion. They are often used to improve the performance of the GPS.
+
+%---------------------------------------------------------
+\subsection{Digital cameras}
+They are particular devices which produces 2D arrays, by mean of an image, containing the measurement of the \textit{visible light} from a 3D scene. You can imagine that, since a 3D scene is transformed into a 2D array, the third dimension is lost. Main components of cameras are: (i) a imaging sensor, (ii) lens to route the light toward the sensor, (iii) an ADC to convert each pixel into a digital value. Ideally, we wish to reproduce the \textit{pinhole model} in which each single 3D point is mapped into a single pixel realizing the so-called \textit{perspective transformation}. There are mainly two types of cameras: (i) \textit{gray level cameras} give as an output a brightness map which is a  measure of the intensity of the elctromagnetic radation; (ii) \textit{Color cameras} measure also the wavelength of such a radiation. In particular, they use separate sensors which are sensitive to different wavelenghts.
+
+
+\subsubsection{Omnidirectional cameras}
+Vanilla cameras provide a limited field of view. \textit{Omnidirectional cameras} solve this issue by achieving a field of view of 180° in both horizontal and vertical directions. \textsf{fisheye lens and mirrors} are used. The pinhole model does not hold anymore, the \textit{spherical projection model} is used instead.
+
+\subsubsection{Event cameras}
+Standard cameras provide data at a fixed rate (tipically 50-60 frame per second). \textit{Event cameras} are equipped with \underline{asynchronous sensors} that generates a series of timestampe events wheter the brightness of the image changes. They are used in task in which is important achieving a certain level of performance.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{img/event_cameras.png}
+    \caption{Difference between standard and event cameras}
+\end{figure}
+
+%---------------------------------------------------------
+\subsection{Ranging sensors}
+They appears as an extension of proximity sensors, since they provide the \textit{distance to objects}. The output of such cameras is an  array of distances (\textit{ranges}) along directions of measurements, or the projection of such distances on the coordinate system of the sensor (\textit{depth}).\\
+A 2D array of range is called a \textit{range map}, on the other hand a 2D array of depth is  called a \textit{depth map}. Combing both maps a \textit{point cloud} can be generated. 
+
+\subsubsection{Sonars}
+They use \textit{sound waves} to \textbf{detect objects} and \textbf{measure distances} can be either passive or active. The latter ones are very often used in mobile robots coupled with \textit{ultrasonic waves}. A mobile robot not rarely mounts an array of SONAR sensor in order to cover an angular sector of interest. Also in this  case  both piezoelectric and capacitive technologies can be exploited.
+
+
+\subsubsection{LiDARs (Light Detection and Ranging)}
+Such sensors use \textit{infrared lasers} together with reflective properties of the environment in order to measure distances. The generated and received waves can be used in different ways to measure distances.
+\begin{enumerate}
+    \itemsep-0.3em
+    \item \textit{Continuous wave} (also known as phase shift based) exploit the difference in phase between the generated and backscattered wave.
+    \item \textit{Pulse Based (PB)} they measure directly the time of flight of a pulse of light, to be interpreted as \textit{round-trip time}.
+ \end{enumerate}
+ Improved versions of such vanilla version can correct some non-idealities due to light deflections. They can cover higher ranges wrt to sonars and the accuracy is improved. However, they are very sensitive to environmental factors, finally their cost is much higher.
+
+\subsubsection{RADARs (Radio Detection and Ranging)}
+They use radiowaves (3mm-30cm), are less accurate with respect to LIDAr, but they can use the \textit{Doppler Effect} to measure distances. They cover a range of 200m in detecting position, relative speed and direction of motion. Briefly speaking, they emit a signal called a \textit{chirp}, whose frequency varies linearly over time. The difference between the frequencies of the emitted and received signal  varies according to the distance of the object to detect.
+
+\subsubsection{ToF cameras}
+\textbf{Time of Flight (ToF) cameras} represent the meeting point between LIDARs sensors and digital cameras. Here an infrared wave is emitted and its reflected wave is detected by a 2D imaging sensor. 
+
+
+\subsubsection{Stereo Cameras}
+They are based on the concept of disparity, here triangulation is used in order to reconstruct depths. Such cameras can also be passive: here there are two ordinary cameras, the accuracy in this case is lower, moreover untextured homogeneous areas are hard to be measured.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.6]{img/stereo_camers.png}
+    \caption{Stereo cameras}
+\end{figure}
+
+\subsubsection{RGB-D Cameras}
+They are particular color cameras which also provide the depth estimates. Even in this case they can be both active or passive. Active cameras use a \textbf{pattern projector}, which creates a saliency map also for homogeneous surfaces.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{img/pattern_projector.png}
+    \caption{Pattern projector}
+\end{figure}
+
+\subsubsection{Structured Light Cameras}
+They use the same principles of stereo cameras with the only difference that they use instead of two cameras, a single camera and a pattern projector which plays the role of a \textit{virtual camera}. Briefly speaking, their working principle can be summarized as follows: 
+\begin{itemize}
+    \itemsep-0.3em
+    \item \textsf{Projection}  A light source (often a laser or LED) projects a structured pattern onto the object.
+    \item \textsf{Capture} A camera records how the pattern distorts.
+    \item \textsf{Processing} The system analyzes pattern distortions to calculate depth using triangulation.
+\end{itemize}
+
 

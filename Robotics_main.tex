@@ -4,6 +4,7 @@
 \addbibresource{biblio_ROB.bib} %Import the bibliography file
 \usepackage{longtable}
 \usepackage{minitoc}
+\usepackage{tabularx}   % Per colonne a larghezza variabile
 \mtcsetdepth{minitoc}{1}
 \usepackage{xcolor}
 %\usepackage{newpxtext,newpxmath} %per stile palatino
@@ -20,6 +21,8 @@
 
 \begin{document}
 \dominitoc
+\newcommand{\bb}[1]{\mathbf{#1}}
+
 \begin{titlepage}
     \centering
     \includegraphics[width=0.35\textwidth]{img/logo_Polito_nuovo.png}\\[0.7cm] % Sostituisci con il nome del tuo file
@@ -41,6 +44,7 @@
 %\input{Chapters/Ch2_Kinematics.tex}
 \input{Chapters/Ch3_MobileRobots.tex}
 \input{Chapters/Ch4_Manipulators.tex}
+\input{Chapters/Ch5_DiffKinematics.tex}
 
 %Appendices
 \appendix
